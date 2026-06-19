@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Name Generator — Northwest Registered Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* NWRA-leaning tokens — swap these for exact brand values */
+    --ink:#14352A;          /* deep forest green */
+    --green:#2F6B43;        /* mid green accent  */
+    --green-soft:#E4EDE5;   /* tint              */
+    --paper:#F6F3EC;        /* warm off-white    */
+    --plate:#FBFAF6;        /* card face         */
+    --brass:#A9854E;        /* engraved warmth   */
+    --brass-deep:#8A6C3C;
+    --text:#23271F;
+    --muted:#5C6356;
+    --line:#DBD6C8;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(20,53,42,.06), 0 12px 30px rgba(20,53,42,.10);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:clamp(28px,5vw,64px) 20px 80px}
+
+  /* ---------- header ---------- */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--green);background:var(--green-soft);
+    padding:6px 12px;border-radius:100px;
+  }
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+  h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;font-size:clamp(2.1rem,5.4vw,3.4rem);
+    line-height:1.04;letter-spacing:-.015em;
+    margin:18px 0 10px;color:var(--ink);
+  }
+  .lede{font-size:clamp(1rem,2.4vw,1.15rem);color:var(--muted);max-width:46ch;margin:0}
+
+  /* ---------- form ---------- */
+  .panel{
+    background:var(--plate);border:1px solid var(--line);border-radius:var(--radius);
+    padding:clamp(18px,3vw,26px);margin-top:30px;box-shadow:var(--shadow);
+  }
+  .field{margin-bottom:18px}
+  .field:last-child{margin-bottom:0}
+  label{display:block;font-weight:600;font-size:.86rem;margin-bottom:7px;color:var(--ink)}
+  .hint{font-weight:400;color:var(--muted)}
+  input[type=text],select{
+    width:100%;font:inherit;font-size:1rem;color:var(--text);
+    padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input[type=text]:focus,select:focus{
+    outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(47,107,67,.15);
+  }
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.row{grid-template-columns:1fr}}
+
+  /* segmented style control */
+  .seg{display:flex;gap:6px;background:var(--green-soft);padding:5px;border-radius:11px}
+  .seg button{
+    flex:1;font:inherit;font-weight:600;font-size:.86rem;color:var(--green);
+    background:transparent;border:0;padding:9px 6px;border-radius:8px;cursor:pointer;
+    transition:background .15s,color .15s,box-shadow .15s;
+  }
+  .seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,53,42,.12)}
+
+  .generate{
+    width:100%;margin-top:22px;font:inherit;font-weight:600;font-size:1.02rem;
+    color:#fff;background:var(--green);border:0;border-radius:11px;padding:15px;
+    cursor:pointer;transition:background .15s,transform .05s;
+  }
+  .generate:hover{background:var(--ink)}
+  .generate:active{transform:translateY(1px)}
+
+  /* ---------- results ---------- */
+  .results-head{
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    margin:38px 0 16px;
+  }
+  .results-head h2{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;color:var(--ink);margin:0;
+  }
+  .reroll{
+    font:inherit;font-weight:600;font-size:.85rem;color:var(--green);
+    background:none;border:0;cursor:pointer;padding:4px 0;
+  }
+  .reroll:hover{color:var(--ink);text-decoration:underline}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+  /* the "engraved plate" signature */
+  .plate{
+    position:relative;background:var(--plate);
+    border:1px solid var(--line);border-top:3px solid var(--brass);
+    border-radius:10px;padding:22px 20px 18px;
+    box-shadow:0 1px 2px rgba(20,53,42,.05);
+  }
+  .plate::before,.plate::after{
+    content:"";position:absolute;top:11px;width:5px;height:5px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#cdbf9d,var(--brass-deep));
+  }
+  .plate::before{left:11px}
+  .plate::after{right:11px}
+  .plate .name{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.32rem;line-height:1.15;
+    color:var(--ink);letter-spacing:-.01em;margin:4px 0 12px;
+  }
+  .plate .suffix{color:var(--brass-deep);font-weight:500}
+  .plate .check{
+    font:inherit;font-weight:600;font-size:.84rem;color:var(--green);
+    background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  }
+  .plate .check:hover{color:var(--ink)}
+  .plate .check svg{width:14px;height:14px}
+
+  .empty{
+    text-align:center;color:var(--muted);padding:46px 20px;
+    border:1px dashed var(--line);border-radius:var(--radius);background:var(--plate);
+  }
+  .empty strong{color:var(--ink);font-weight:600}
+
+  /* staggered entrance */
+  .pop{opacity:0;transform:translateY(10px);animation:pop .42s forwards}
+  @keyframes pop{to{opacity:1;transform:none}}
+
+  /* ---------- handoff CTA ---------- */
+  .handoff{
+    margin-top:40px;background:var(--ink);color:#fff;border-radius:var(--radius);
+    padding:clamp(26px,4vw,40px);text-align:center;
+  }
+  .handoff h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.4rem,3.4vw,1.9rem);margin:0 0 8px}
+  .handoff p{color:#C7D3C5;max-width:48ch;margin:0 auto 22px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    font:inherit;font-weight:600;font-size:.98rem;border-radius:11px;padding:13px 22px;
+    cursor:pointer;text-decoration:none;display:inline-block;transition:transform .05s,opacity .15s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:#fff;color:var(--ink);border:0}
+  .btn-primary:hover{opacity:.92}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+  .btn-ghost:hover{border-color:#fff}
+
+  .fineprint{margin-top:18px;font-size:.8rem;color:var(--muted);text-align:center;max-width:60ch;margin-left:auto;margin-right:auto}
+
+  @media(prefers-reduced-motion:reduce){
+    .pop{animation:none;opacity:1;transform:none}
+    *{transition:none!important}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <span class="eyebrow">Free tool · Northwest Registered Agent</span>
+  <h1>Name your business.</h1>
+  <p class="lede">Tell us what you do. We'll spin up names you can actually use—then help you check if one's available.</p>
+
+  <section class="panel" aria-label="Name generator">
+    <div class="field">
+      <label for="kw">What's your business about? <span class="hint">— a word or two</span></label>
+      <input type="text" id="kw" placeholder="e.g. coffee, bookkeeping, your last name…" maxlength="40" autocomplete="off">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="ind">Industry</label>
+        <select id="ind">
+          <option value="general">General / Not sure yet</option>
+          <option value="consulting">Consulting & Services</option>
+          <option value="tech">Tech & Software</option>
+          <option value="retail">Retail & E-commerce</option>
+          <option value="food">Food & Beverage</option>
+          <option value="wellness">Health & Wellness</option>
+          <option value="creative">Creative & Design</option>
+          <option value="realestate">Real Estate</option>
+          <option value="trades">Trades & Construction</option>
+          <option value="finance">Finance & Legal</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Style</label>
+        <div class="seg" role="group" aria-label="Naming style">
+          <button type="button" data-style="modern" aria-pressed="true">Modern</button>
+          <button type="button" data-style="classic" aria-pressed="false">Classic</button>
+          <button type="button" data-style="bold" aria-pressed="false">Bold</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="generate" id="gen">Generate names</button>
+  </section>
+
+  <section id="resultsWrap" aria-live="polite">
+    <div class="empty" id="empty">
+      <strong>Your name ideas will show up here.</strong><br>
+      Add a keyword, pick a style, and hit <em>Generate</em>.
+    </div>
+  </section>
+
+  <section class="handoff" id="handoff" hidden>
+    <h2>Found one you like?</h2>
+    <p>A name only counts if it's available—and filed right. Talk to a formation expert, free. No scripts, no pressure to buy.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" data-cta="check">Check name availability</a>
+      <a class="btn btn-ghost" href="#" data-cta="chat">Chat with an expert</a>
+    </div>
+    <p class="fineprint">These are suggestions to get you started. Availability isn't guaranteed until it's checked against your state's records—that part's on us.</p>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- word banks -------------------------------------------------------
+  const banks = {
+    general:   { roots:["Summit","Anchor","North","Keystone","Cardinal","Bright","Harbor","Forge","Meridian","Haven","Pioneer","Evergreen"],
+                 suffix:["Group","Co.","Works","& Partners","Ventures","Collective"] },
+    consulting:{ roots:["Compass","Vantage","Clarity","Catalyst","Lighthouse","Bridgepoint","Lever","Beacon","Atlas","Insight"],
+                 suffix:["Advisors","Consulting","Group","Partners","Strategy","Co."] },
+    tech:      { roots:["Loop","Stack","Nimbus","Vector","Pixel","Forge","Bolt","Orbit","Cipher","Lumen","Quill","Signal"],
+                 suffix:["Labs","Systems","Technologies","Software","Studio","io"] },
+    retail:    { roots:["Maple","Harbor","Willow","Copper","Sage","Birch","Marigold","Wander","Linden","Hearth"],
+                 suffix:["& Co.","Goods","Supply","Shop","Mercantile","Trading Co."] },
+    food:      { roots:["Hearth","Maple","Stoneground","Copper Kettle","Wildflour","Harvest","Basil","Crumb","Ember","Cedar"],
+                 suffix:["Kitchen","& Table","Eatery","Provisions","Bakehouse","Roasters"] },
+    wellness:  { roots:["Still","Verdant","Rooted","Meadow","Aria","Lumen","Calm","Vital","Willow","Soma"],
+                 suffix:["Wellness","Studio","Collective","Health","& Co.","Therapy"] },
+    creative:  { roots:["Ink","Folio","Muse","Drift","Prism","Atlas","Studio","Verve","Paper","Slate"],
+                 suffix:["Studio","& Co.","Creative","Design","House","Works"] },
+    realestate:{ roots:["Cornerstone","Summit","Heritage","Anchor","Highland","Brick & Beam","Keystone","Northgate","Maple Ridge","Harbor"],
+                 suffix:["Properties","Realty","Group","Homes","Estates","& Co."] },
+    trades:    { roots:["Ironwood","Granite","TrueLine","Apex","Cedar","Bedrock","Northstar","Forge","Summit","Keystone"],
+                 suffix:["Construction","Builders","Contracting","& Sons","Trades","Works"] },
+    finance:   { roots:["Sterling","Meridian","Cornerstone","Vantage","Aegis","Keystone","Beacon","Atlas","Harbor","Ledger"],
+                 suffix:["Capital","Advisors","Financial","Group","Partners","& Co."] }
+  };
+
+  // style modifiers
+  const styles = {
+    modern:  { adj:["Open","Clear","Made","Even","Plain","Onward","Daily","Honest"], coin:true },
+    classic: { adj:["Heritage","Old Town","Liberty","Founders","Standard","Charter","Provincial","Crown"], coin:false },
+    bold:    { adj:["Iron","Apex","Bolt","Titan","Vanguard","Maverick","Surge","Pinnacle"], coin:true }
+  };
+
+  let style = "modern";
+
+  // ---- helpers ----------------------------------------------------------
+  const pick = a => a[Math.floor(Math.random()*a.length)];
+  const cap  = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
+  const clean = s => s.trim().replace(/[^a-zA-Z0-9 ]/g,"").replace(/\s+/g," ");
+
+  function uniqueNames(kwRaw, ind){
+    const bank = banks[ind] || banks.general;
+    const st   = styles[style];
+    const kw   = cap(clean(kwRaw).split(" ")[0] || "");
+    const out  = new Set();
+    let guard  = 0;
+
+    while(out.size < 6 && guard++ < 80){
+      const p = Math.random();
+      let name;
+
+      if(kw && p < 0.55){
+        // keyword-driven patterns
+        const r = Math.random();
+        if(r < 0.30)      name = `${kw} ${pick(bank.suffix)}`;
+        else if(r < 0.55) name = `${pick(bank.roots)} ${kw}`;
+        else if(r < 0.78) name = `${pick(st.adj)} ${kw}`;
+        else if(st.coin)  name = `${kw}${pick(["ly","ora","wise","base","ify","go"])}`;
+        else              name = `${kw} & ${pick(bank.roots)}`;
+      } else {
+        // bank-driven patterns
+        const r = Math.random();
+        if(r < 0.45)      name = `${pick(bank.roots)} ${pick(bank.suffix)}`;
+        else if(r < 0.72) name = `${pick(st.adj)} ${pick(bank.roots)}`;
+        else              name = `${pick(bank.roots)}${pick(bank.roots).toLowerCase()}`;
+      }
+      out.add(name.replace(/\s+/g," ").trim());
+    }
+    return [...out].slice(0,6);
+  }
+
+  // split trailing suffix so we can tint it
+  function render(names){
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    const sufRe = /( & Co\.| Co\.| io| Labs| & Partners| & Sons)$/;
+
+    names.forEach((n,i)=>{
+      const m = n.match(sufRe);
+      let html = n;
+      if(m){ html = n.slice(0,m.index) + '<span class="suffix">'+m[0]+'</span>'; }
+
+      const card = document.createElement("div");
+      card.className = "plate pop";
+      card.style.animationDelay = (i*55)+"ms";
+      card.innerHTML =
+        '<div class="name">'+html+'</div>'+
+        '<button class="check" data-name="'+n.replace(/"/g,'&quot;')+'">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>'+
+          'Check if it\u2019s available</button>';
+      grid.appendChild(card);
+    });
+    return grid;
+  }
+
+  // ---- wiring -----------------------------------------------------------
+  const wrap    = document.getElementById("resultsWrap");
+  const empty   = document.getElementById("empty");
+  const handoff = document.getElementById("handoff");
+
+  document.querySelectorAll(".seg button").forEach(b=>{
+    b.addEventListener("click",()=>{
+      document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed","false"));
+      b.setAttribute("aria-pressed","true");
+      style = b.dataset.style;
+    });
+  });
+
+  function generate(){
+    const kw  = document.getElementById("kw").value;
+    const ind = document.getElementById("ind").value;
+    const names = uniqueNames(kw, ind);
+
+    wrap.innerHTML = "";
+    const head = document.createElement("div");
+    head.className = "results-head";
+    head.innerHTML = '<h2>Name ideas</h2><button class="reroll" id="reroll">Shuffle again ↻</button>';
+    wrap.appendChild(head);
+    wrap.appendChild(render(names));
+    document.getElementById("reroll").addEventListener("click",generate);
+
+    handoff.hidden = false;
+    if(empty) empty.style.display = "none";
+
+    // handoff for individual cards (PoC: routes to the same availability check)
+    wrap.querySelectorAll(".check").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        // In production: prefill the availability search with btn.dataset.name
+        document.querySelector('[data-cta="check"]').scrollIntoView({behavior:"smooth",block:"center"});
+      });
+    });
+  }
+
+  document.getElementById("gen").addEventListener("click",generate);
+  document.getElementById("kw").addEventListener("keydown",e=>{ if(e.key==="Enter") generate(); });
+
+  // demo CTA handlers — replace hrefs with real NWRA destinations
+  document.querySelectorAll('[data-cta]').forEach(a=>{
+    a.addEventListener("click",e=>{
+      e.preventDefault();
+      alert("PoC link — wire this to the business record search / chat. CTA: "+a.dataset.cta);
+    });
+  });
+})();
+</script>
+</body>
+</html>
