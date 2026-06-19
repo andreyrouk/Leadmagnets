@@ -3,201 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business Name Generator — Northwest Registered Agent</title>
+<title>Business Name Generator | Northwest Registered Agent</title>
+<meta name="description" content="Tell us what you do — we'll spin up business name ideas you can actually use, then help you check if one's available.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    /* NWRA-leaning tokens — swap these for exact brand values */
-    --ink:#14352A;          /* deep forest green */
-    --green:#2F6B43;        /* mid green accent  */
-    --green-soft:#E4EDE5;   /* tint              */
-    --paper:#F6F3EC;        /* warm off-white    */
-    --plate:#FBFAF6;        /* card face         */
-    --brass:#A9854E;        /* engraved warmth   */
-    --brass-deep:#8A6C3C;
-    --text:#23271F;
-    --muted:#5C6356;
-    --line:#DBD6C8;
-    --radius:14px;
-    --shadow:0 1px 2px rgba(20,53,42,.06), 0 12px 30px rgba(20,53,42,.10);
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--text);
-    font-family:'Inter',system-ui,-apple-system,sans-serif;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:920px;margin:0 auto;padding:clamp(28px,5vw,64px) 20px 80px}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ---------- header ---------- */
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--green);background:var(--green-soft);
-    padding:6px 12px;border-radius:100px;
-  }
-  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
-  h1{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:500;font-size:clamp(2.1rem,5.4vw,3.4rem);
-    line-height:1.04;letter-spacing:-.015em;
-    margin:18px 0 10px;color:var(--ink);
-  }
-  .lede{font-size:clamp(1rem,2.4vw,1.15rem);color:var(--muted);max-width:46ch;margin:0}
+:root {
+  --nwra-navy: #13384F;
+  --nwra-navy-mid: #1F5082;
+  --nwra-blue: #448CCE;
+  --nwra-blue-light: #D6E4F2;
+  --nwra-blue-soft: #EEF3F9;
+  --nwra-gold: #DD9E2D;
+  --nwra-gold-soft: #FDF4E4;
+  --nwra-green: #008761;
+  --nwra-green-soft: #E0F2EA;
+  --nwra-gray: #F0F0F0;
+  --nwra-text: #242424;
+  --nwra-muted: #5A6B7A;
+  --nwra-faint: #7A8A99;
+  --nwra-white: #FFFFFF;
+}
 
-  /* ---------- form ---------- */
-  .panel{
-    background:var(--plate);border:1px solid var(--line);border-radius:var(--radius);
-    padding:clamp(18px,3vw,26px);margin-top:30px;box-shadow:var(--shadow);
-  }
-  .field{margin-bottom:18px}
-  .field:last-child{margin-bottom:0}
-  label{display:block;font-weight:600;font-size:.86rem;margin-bottom:7px;color:var(--ink)}
-  .hint{font-weight:400;color:var(--muted)}
-  input[type=text],select{
-    width:100%;font:inherit;font-size:1rem;color:var(--text);
-    padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;
-    transition:border-color .15s, box-shadow .15s;
-  }
-  input[type=text]:focus,select:focus{
-    outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(47,107,67,.15);
-  }
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:560px){.row{grid-template-columns:1fr}}
+html { font-size: 16px; }
 
-  /* segmented style control */
-  .seg{display:flex;gap:6px;background:var(--green-soft);padding:5px;border-radius:11px}
-  .seg button{
-    flex:1;font:inherit;font-weight:600;font-size:.86rem;color:var(--green);
-    background:transparent;border:0;padding:9px 6px;border-radius:8px;cursor:pointer;
-    transition:background .15s,color .15s,box-shadow .15s;
-  }
-  .seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,53,42,.12)}
+body {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--nwra-gray);
+  color: var(--nwra-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding: 40px 24px;
+}
 
-  .generate{
-    width:100%;margin-top:22px;font:inherit;font-weight:600;font-size:1.02rem;
-    color:#fff;background:var(--green);border:0;border-radius:11px;padding:15px;
-    cursor:pointer;transition:background .15s,transform .05s;
-  }
-  .generate:hover{background:var(--ink)}
-  .generate:active{transform:translateY(1px)}
+@media (max-width: 640px) { body { padding: 20px 12px; } }
 
-  /* ---------- results ---------- */
-  .results-head{
-    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-    margin:38px 0 16px;
-  }
-  .results-head h2{
-    font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;color:var(--ink);margin:0;
-  }
-  .reroll{
-    font:inherit;font-weight:600;font-size:.85rem;color:var(--green);
-    background:none;border:0;cursor:pointer;padding:4px 0;
-  }
-  .reroll:hover{color:var(--ink);text-decoration:underline}
+.bng-container { max-width: 640px; margin: 0 auto; }
 
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+/* Brand */
+.bng-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+.bng-brand-mark {
+  width: 32px; height: 32px; background: var(--nwra-navy); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+}
+.bng-brand-mark span { color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; }
+.bng-brand-name { font-size: 13px; font-weight: 600; color: var(--nwra-muted); letter-spacing: 0.03em; }
 
-  /* the "engraved plate" signature */
-  .plate{
-    position:relative;background:var(--plate);
-    border:1px solid var(--line);border-top:3px solid var(--brass);
-    border-radius:10px;padding:22px 20px 18px;
-    box-shadow:0 1px 2px rgba(20,53,42,.05);
-  }
-  .plate::before,.plate::after{
-    content:"";position:absolute;top:11px;width:5px;height:5px;border-radius:50%;
-    background:radial-gradient(circle at 35% 35%,#cdbf9d,var(--brass-deep));
-  }
-  .plate::before{left:11px}
-  .plate::after{right:11px}
-  .plate .name{
-    font-family:'Fraunces',serif;font-weight:600;font-size:1.32rem;line-height:1.15;
-    color:var(--ink);letter-spacing:-.01em;margin:4px 0 12px;
-  }
-  .plate .suffix{color:var(--brass-deep);font-weight:500}
-  .plate .check{
-    font:inherit;font-weight:600;font-size:.84rem;color:var(--green);
-    background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
-  }
-  .plate .check:hover{color:var(--ink)}
-  .plate .check svg{width:14px;height:14px}
+/* Intro */
+.bng-eyebrow {
+  font-size: 11px; font-weight: 700; color: var(--nwra-blue);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px;
+}
+.bng-h1 {
+  font-size: 36px; font-weight: 700; color: var(--nwra-navy);
+  letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 14px;
+}
+.bng-lede { font-size: 16px; color: var(--nwra-muted); line-height: 1.55; margin: 0; max-width: 48ch; }
 
-  .empty{
-    text-align:center;color:var(--muted);padding:46px 20px;
-    border:1px dashed var(--line);border-radius:var(--radius);background:var(--plate);
-  }
-  .empty strong{color:var(--ink);font-weight:600}
+.bng-trust-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; margin-bottom: 32px; }
+.bng-trust-pill { font-size: 12px; font-weight: 600; color: var(--nwra-faint); display: flex; align-items: center; gap: 5px; }
+.bng-trust-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--nwra-blue-light); }
 
-  /* staggered entrance */
-  .pop{opacity:0;transform:translateY(10px);animation:pop .42s forwards}
-  @keyframes pop{to{opacity:1;transform:none}}
+/* Card */
+.bng-card {
+  background: var(--nwra-white); border-radius: 16px; padding: 40px; margin-bottom: 24px;
+  box-shadow: 0 2px 20px rgba(19,56,79,0.06);
+}
+@media (max-width: 640px) {
+  .bng-card { padding: 28px 20px; border-radius: 12px; }
+  .bng-h1 { font-size: 26px; }
+}
 
-  /* ---------- handoff CTA ---------- */
-  .handoff{
-    margin-top:40px;background:var(--ink);color:#fff;border-radius:var(--radius);
-    padding:clamp(26px,4vw,40px);text-align:center;
-  }
-  .handoff h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.4rem,3.4vw,1.9rem);margin:0 0 8px}
-  .handoff p{color:#C7D3C5;max-width:48ch;margin:0 auto 22px}
-  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .btn{
-    font:inherit;font-weight:600;font-size:.98rem;border-radius:11px;padding:13px 22px;
-    cursor:pointer;text-decoration:none;display:inline-block;transition:transform .05s,opacity .15s;
-  }
-  .btn:active{transform:translateY(1px)}
-  .btn-primary{background:#fff;color:var(--ink);border:0}
-  .btn-primary:hover{opacity:.92}
-  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
-  .btn-ghost:hover{border-color:#fff}
+/* Form */
+.bng-field { margin-bottom: 22px; }
+.bng-field:last-of-type { margin-bottom: 0; }
+.bng-label { display: block; font-size: 12px; font-weight: 700; color: var(--nwra-navy); letter-spacing: 0.04em; margin-bottom: 9px; }
+.bng-label .bng-hint { font-weight: 600; color: var(--nwra-faint); letter-spacing: 0; text-transform: none; }
 
-  .fineprint{margin-top:18px;font-size:.8rem;color:var(--muted);text-align:center;max-width:60ch;margin-left:auto;margin-right:auto}
+.bng-input, .bng-select {
+  width: 100%; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--nwra-navy);
+  padding: 15px 16px; border: 2px solid var(--nwra-blue-light); border-radius: 10px;
+  background: var(--nwra-white); transition: border-color 0.15s, background 0.15s;
+}
+.bng-input::placeholder { color: var(--nwra-faint); font-weight: 600; }
+.bng-input:focus, .bng-select:focus {
+  outline: none; border-color: var(--nwra-blue); background: var(--nwra-blue-soft);
+}
+.bng-select { appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23448CCE' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px; cursor: pointer;
+}
 
-  @media(prefers-reduced-motion:reduce){
-    .pop{animation:none;opacity:1;transform:none}
-    *{transition:none!important}
-  }
+.bng-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .bng-row { grid-template-columns: 1fr; } }
+
+/* Segmented style control */
+.bng-seg { display: flex; gap: 6px; background: var(--nwra-blue-soft); padding: 5px; border-radius: 10px; }
+.bng-seg button {
+  flex: 1; font-family: inherit; font-weight: 700; font-size: 12px; letter-spacing: 0.04em;
+  color: var(--nwra-blue); background: transparent; border: none; padding: 11px 6px; border-radius: 7px;
+  cursor: pointer; transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.bng-seg button[aria-pressed="true"] {
+  background: var(--nwra-white); color: var(--nwra-navy); box-shadow: 0 1px 3px rgba(19,56,79,0.14);
+}
+
+.bng-generate {
+  width: 100%; margin-top: 26px; background: var(--nwra-blue); color: #fff; border: none;
+  border-radius: 8px; padding: 18px 28px; font-size: 13px; font-weight: 700; font-family: inherit;
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+}
+.bng-generate:hover { background: var(--nwra-navy-mid); }
+
+/* Results */
+.bng-results-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 36px 0 16px; }
+.bng-results-head h2 { font-size: 20px; font-weight: 700; color: var(--nwra-navy); letter-spacing: -0.02em; margin: 0; }
+.bng-reroll {
+  font-family: inherit; font-size: 12px; font-weight: 700; color: var(--nwra-blue);
+  letter-spacing: 0.04em; background: none; border: none; cursor: pointer; padding: 4px 0;
+}
+.bng-reroll:hover { color: var(--nwra-navy); }
+
+.bng-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 560px) { .bng-grid { grid-template-columns: 1fr; } }
+
+.bng-name-card {
+  background: var(--nwra-white); border: 2px solid var(--nwra-blue-light); border-radius: 10px;
+  padding: 20px; transition: border-color 0.15s, background 0.15s;
+}
+.bng-name-card:hover { border-color: var(--nwra-blue); background: var(--nwra-blue-soft); }
+.bng-name { font-size: 20px; font-weight: 700; color: var(--nwra-navy); letter-spacing: -0.015em; line-height: 1.2; margin-bottom: 14px; }
+.bng-name .bng-suffix { color: var(--nwra-faint); font-weight: 600; }
+.bng-check {
+  font-family: inherit; font-size: 12px; font-weight: 700; color: var(--nwra-blue); letter-spacing: 0.03em;
+  background: none; border: none; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+.bng-check:hover { color: var(--nwra-navy); }
+.bng-check svg { width: 13px; height: 13px; }
+
+.bng-empty {
+  text-align: center; color: var(--nwra-muted); padding: 44px 20px;
+  border: 2px dashed var(--nwra-blue-light); border-radius: 16px; background: var(--nwra-white); font-size: 14px;
+}
+.bng-empty strong { display: block; color: var(--nwra-navy); font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+
+.bng-pop { opacity: 0; transform: translateY(8px); animation: bngPop 0.36s forwards; }
+@keyframes bngPop { to { opacity: 1; transform: none; } }
+
+/* CTA (matches quiz) */
+.bng-cta {
+  background: linear-gradient(135deg, var(--nwra-blue) 0%, var(--nwra-navy-mid) 100%);
+  border-radius: 16px; padding: 40px; margin-top: 24px; margin-bottom: 24px;
+  color: #fff; position: relative; overflow: hidden;
+}
+@media (max-width: 640px) { .bng-cta { padding: 28px 20px; border-radius: 12px; } }
+.bng-cta-glow {
+  position: absolute; top: 0; right: 0; width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  border-radius: 50%; transform: translate(30%, -30%);
+}
+.bng-cta-content { position: relative; z-index: 1; }
+.bng-cta-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.75; margin-bottom: 10px; }
+.bng-cta-title { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; }
+.bng-cta-body { font-size: 15px; line-height: 1.6; opacity: 0.88; margin-bottom: 28px; max-width: 520px; }
+.bng-cta-phone {
+  display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 10px;
+  padding: 16px 20px; text-decoration: none; transition: opacity 0.15s; max-width: 340px;
+}
+.bng-cta-phone:hover { opacity: 0.93; }
+.bng-phone-icon { width: 36px; height: 36px; background: var(--nwra-blue-soft); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.bng-phone-text { flex: 1; }
+.bng-phone-label { font-size: 10px; font-weight: 700; color: var(--nwra-faint); letter-spacing: 0.08em; text-transform: uppercase; }
+.bng-phone-num { font-size: 18px; font-weight: 700; color: var(--nwra-navy); letter-spacing: -0.01em; }
+.bng-phone-arrow { font-size: 18px; color: var(--nwra-blue); font-weight: 700; }
+
+/* Domain pill */
+.bng-domain-pill {
+  background: var(--nwra-white); border-radius: 16px; padding: 18px 24px; margin-bottom: 24px;
+  box-shadow: 0 2px 20px rgba(19,56,79,0.06); display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--nwra-muted);
+}
+.bng-domain-icon { font-size: 20px; flex-shrink: 0; }
+.bng-domain-pill strong { color: var(--nwra-navy); font-weight: 700; }
+
+.bng-no-pressure { text-align: center; font-size: 12px; font-weight: 600; color: var(--nwra-faint); margin-bottom: 6px; }
+.bng-privacy { text-align: center; font-size: 12px; color: var(--nwra-faint); line-height: 1.6; margin-top: 18px; }
+
+.bng-hidden { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bng-pop { animation: none; opacity: 1; transform: none; }
+  * { transition: none !important; }
+}
 </style>
 </head>
 <body>
-<main class="wrap">
 
-  <span class="eyebrow">Free tool · Northwest Registered Agent</span>
-  <h1>Name your business.</h1>
-  <p class="lede">Tell us what you do. We'll spin up names you can actually use—then help you check if one's available.</p>
+<div class="bng-container">
 
-  <section class="panel" aria-label="Name generator">
-    <div class="field">
-      <label for="kw">What's your business about? <span class="hint">— a word or two</span></label>
-      <input type="text" id="kw" placeholder="e.g. coffee, bookkeeping, your last name…" maxlength="40" autocomplete="off">
+  <!-- Brand -->
+  <div class="bng-brand">
+    <div class="bng-brand-mark"><span>NW</span></div>
+    <span class="bng-brand-name">Northwest Registered Agent</span>
+  </div>
+
+  <!-- Intro -->
+  <div class="bng-eyebrow">Free Business Tool</div>
+  <h1 class="bng-h1">Name your business.</h1>
+  <p class="bng-lede">Tell us what you do. We'll spin up names you can actually use — then help you check if one's available.</p>
+  <div class="bng-trust-row">
+    <span class="bng-trust-pill"><span class="bng-trust-dot"></span> No sales pitch</span>
+    <span class="bng-trust-pill"><span class="bng-trust-dot"></span> No spam emails</span>
+    <span class="bng-trust-pill"><span class="bng-trust-dot"></span> 30 seconds</span>
+  </div>
+
+  <!-- Form -->
+  <div class="bng-card">
+    <div class="bng-field">
+      <label class="bng-label" for="kw">What's your business about? <span class="bng-hint">— a word or two</span></label>
+      <input class="bng-input" type="text" id="kw" placeholder="e.g. coffee, bookkeeping, your last name…" maxlength="40" autocomplete="off">
     </div>
 
-    <div class="row">
-      <div class="field">
-        <label for="ind">Industry</label>
-        <select id="ind">
+    <div class="bng-row">
+      <div class="bng-field">
+        <label class="bng-label" for="ind">Industry</label>
+        <select class="bng-select" id="ind">
           <option value="general">General / Not sure yet</option>
-          <option value="consulting">Consulting & Services</option>
-          <option value="tech">Tech & Software</option>
-          <option value="retail">Retail & E-commerce</option>
-          <option value="food">Food & Beverage</option>
-          <option value="wellness">Health & Wellness</option>
-          <option value="creative">Creative & Design</option>
+          <option value="consulting">Consulting &amp; Services</option>
+          <option value="tech">Tech &amp; Software</option>
+          <option value="retail">Retail &amp; E-commerce</option>
+          <option value="food">Food &amp; Beverage</option>
+          <option value="wellness">Health &amp; Wellness</option>
+          <option value="creative">Creative &amp; Design</option>
           <option value="realestate">Real Estate</option>
-          <option value="trades">Trades & Construction</option>
-          <option value="finance">Finance & Legal</option>
+          <option value="trades">Trades &amp; Construction</option>
+          <option value="finance">Finance &amp; Legal</option>
         </select>
       </div>
-      <div class="field">
-        <label>Style</label>
-        <div class="seg" role="group" aria-label="Naming style">
+      <div class="bng-field">
+        <label class="bng-label">Style</label>
+        <div class="bng-seg" role="group" aria-label="Naming style">
           <button type="button" data-style="modern" aria-pressed="true">Modern</button>
           <button type="button" data-style="classic" aria-pressed="false">Classic</button>
           <button type="button" data-style="bold" aria-pressed="false">Bold</button>
@@ -205,34 +254,51 @@
       </div>
     </div>
 
-    <button class="generate" id="gen">Generate names</button>
-  </section>
+    <button class="bng-generate" id="gen">Generate Names →</button>
+  </div>
 
-  <section id="resultsWrap" aria-live="polite">
-    <div class="empty" id="empty">
-      <strong>Your name ideas will show up here.</strong><br>
-      Add a keyword, pick a style, and hit <em>Generate</em>.
+  <!-- Results -->
+  <div id="resultsWrap" aria-live="polite">
+    <div class="bng-empty" id="empty">
+      <strong>Your name ideas will show up here.</strong>
+      Add a keyword, pick a style, and hit Generate.
     </div>
-  </section>
+  </div>
 
-  <section class="handoff" id="handoff" hidden>
-    <h2>Found one you like?</h2>
-    <p>A name only counts if it's available—and filed right. Talk to a formation expert, free. No scripts, no pressure to buy.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#" data-cta="check">Check name availability</a>
-      <a class="btn btn-ghost" href="#" data-cta="chat">Chat with an expert</a>
+  <!-- Handoff CTA -->
+  <div id="handoff" class="bng-hidden">
+    <div class="bng-cta">
+      <div class="bng-cta-glow"></div>
+      <div class="bng-cta-content">
+        <div class="bng-cta-label">Free 10-Minute Call</div>
+        <div class="bng-cta-title">Found one you like?</div>
+        <p class="bng-cta-body">A name only counts if it's available — and filed right. A real person will check it against your state's records and walk you through forming it. No pitch, no follow-up spam.</p>
+        <a class="bng-cta-phone" href="tel:18009296421">
+          <div class="bng-phone-icon">📞</div>
+          <div class="bng-phone-text">
+            <div class="bng-phone-label">Call us free</div>
+            <div class="bng-phone-num">1-800-929-6421</div>
+          </div>
+          <div class="bng-phone-arrow">→</div>
+        </a>
+      </div>
     </div>
-    <p class="fineprint">These are suggestions to get you started. Availability isn't guaranteed until it's checked against your state's records—that part's on us.</p>
-  </section>
+    <div class="bng-domain-pill">
+      <span class="bng-domain-icon">🌐</span>
+      <span>Pick a name, and your <strong>domain is on us</strong> when you form with Northwest.</span>
+    </div>
+    <p class="bng-no-pressure">No follow-up spam. No pressure. Just answers.</p>
+  </div>
 
-</main>
+  <p class="bng-privacy">Names are suggestions to get you started. Availability isn't guaranteed until it's checked against your state's records — that part's on us.</p>
+
+</div><!-- /bng-container -->
 
 <script>
 (function(){
   "use strict";
 
-  // ---- word banks -------------------------------------------------------
-  const banks = {
+  var banks = {
     general:   { roots:["Summit","Anchor","North","Keystone","Cardinal","Bright","Harbor","Forge","Meridian","Haven","Pioneer","Evergreen"],
                  suffix:["Group","Co.","Works","& Partners","Ventures","Collective"] },
     consulting:{ roots:["Compass","Vantage","Clarity","Catalyst","Lighthouse","Bridgepoint","Lever","Beacon","Atlas","Insight"],
@@ -255,123 +321,107 @@
                  suffix:["Capital","Advisors","Financial","Group","Partners","& Co."] }
   };
 
-  // style modifiers
-  const styles = {
+  var styles = {
     modern:  { adj:["Open","Clear","Made","Even","Plain","Onward","Daily","Honest"], coin:true },
     classic: { adj:["Heritage","Old Town","Liberty","Founders","Standard","Charter","Provincial","Crown"], coin:false },
     bold:    { adj:["Iron","Apex","Bolt","Titan","Vanguard","Maverick","Surge","Pinnacle"], coin:true }
   };
 
-  let style = "modern";
+  var style = "modern";
 
-  // ---- helpers ----------------------------------------------------------
-  const pick = a => a[Math.floor(Math.random()*a.length)];
-  const cap  = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
-  const clean = s => s.trim().replace(/[^a-zA-Z0-9 ]/g,"").replace(/\s+/g," ");
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
+  function clean(s){ return s.trim().replace(/[^a-zA-Z0-9 ]/g,"").replace(/\s+/g," "); }
 
   function uniqueNames(kwRaw, ind){
-    const bank = banks[ind] || banks.general;
-    const st   = styles[style];
-    const kw   = cap(clean(kwRaw).split(" ")[0] || "");
-    const out  = new Set();
-    let guard  = 0;
+    var bank = banks[ind] || banks.general;
+    var st = styles[style];
+    var kw = cap(clean(kwRaw).split(" ")[0] || "");
+    var out = [];
+    var seen = {};
+    var guard = 0;
 
-    while(out.size < 6 && guard++ < 80){
-      const p = Math.random();
-      let name;
-
+    while(out.length < 6 && guard++ < 90){
+      var name, r, p = Math.random();
       if(kw && p < 0.55){
-        // keyword-driven patterns
-        const r = Math.random();
-        if(r < 0.30)      name = `${kw} ${pick(bank.suffix)}`;
-        else if(r < 0.55) name = `${pick(bank.roots)} ${kw}`;
-        else if(r < 0.78) name = `${pick(st.adj)} ${kw}`;
-        else if(st.coin)  name = `${kw}${pick(["ly","ora","wise","base","ify","go"])}`;
-        else              name = `${kw} & ${pick(bank.roots)}`;
+        r = Math.random();
+        if(r < 0.30)      name = kw + " " + pick(bank.suffix);
+        else if(r < 0.55) name = pick(bank.roots) + " " + kw;
+        else if(r < 0.78) name = pick(st.adj) + " " + kw;
+        else if(st.coin)  name = kw + pick(["ly","ora","wise","base","ify","go"]);
+        else              name = kw + " & " + pick(bank.roots);
       } else {
-        // bank-driven patterns
-        const r = Math.random();
-        if(r < 0.45)      name = `${pick(bank.roots)} ${pick(bank.suffix)}`;
-        else if(r < 0.72) name = `${pick(st.adj)} ${pick(bank.roots)}`;
-        else              name = `${pick(bank.roots)}${pick(bank.roots).toLowerCase()}`;
+        r = Math.random();
+        if(r < 0.45)      name = pick(bank.roots) + " " + pick(bank.suffix);
+        else if(r < 0.72) name = pick(st.adj) + " " + pick(bank.roots);
+        else              name = pick(bank.roots) + pick(bank.roots).toLowerCase();
       }
-      out.add(name.replace(/\s+/g," ").trim());
+      name = name.replace(/\s+/g," ").trim();
+      if(!seen[name]){ seen[name] = 1; out.push(name); }
     }
-    return [...out].slice(0,6);
+    return out.slice(0,6);
   }
 
-  // split trailing suffix so we can tint it
+  var sufRe = /( & Co\.| Co\.| io| Labs| & Partners| & Sons)$/;
+
   function render(names){
-    const grid = document.createElement("div");
-    grid.className = "grid";
-    const sufRe = /( & Co\.| Co\.| io| Labs| & Partners| & Sons)$/;
-
-    names.forEach((n,i)=>{
-      const m = n.match(sufRe);
-      let html = n;
-      if(m){ html = n.slice(0,m.index) + '<span class="suffix">'+m[0]+'</span>'; }
-
-      const card = document.createElement("div");
-      card.className = "plate pop";
-      card.style.animationDelay = (i*55)+"ms";
+    var grid = document.createElement("div");
+    grid.className = "bng-grid";
+    names.forEach(function(n, i){
+      var m = n.match(sufRe);
+      var html = m ? (n.slice(0, m.index) + '<span class="bng-suffix">' + m[0] + '</span>') : n;
+      var card = document.createElement("div");
+      card.className = "bng-name-card bng-pop";
+      card.style.animationDelay = (i*55) + "ms";
       card.innerHTML =
-        '<div class="name">'+html+'</div>'+
-        '<button class="check" data-name="'+n.replace(/"/g,'&quot;')+'">'+
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>'+
+        '<div class="bng-name">' + html + '</div>' +
+        '<button class="bng-check" data-name="' + n.replace(/"/g,'&quot;') + '">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>' +
           'Check if it\u2019s available</button>';
       grid.appendChild(card);
     });
     return grid;
   }
 
-  // ---- wiring -----------------------------------------------------------
-  const wrap    = document.getElementById("resultsWrap");
-  const empty   = document.getElementById("empty");
-  const handoff = document.getElementById("handoff");
+  var wrap = document.getElementById("resultsWrap");
+  var empty = document.getElementById("empty");
+  var handoff = document.getElementById("handoff");
 
-  document.querySelectorAll(".seg button").forEach(b=>{
-    b.addEventListener("click",()=>{
-      document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed","false"));
+  var segBtns = document.querySelectorAll(".bng-seg button");
+  segBtns.forEach(function(b){
+    b.addEventListener("click", function(){
+      segBtns.forEach(function(x){ x.setAttribute("aria-pressed","false"); });
       b.setAttribute("aria-pressed","true");
       style = b.dataset.style;
     });
   });
 
   function generate(){
-    const kw  = document.getElementById("kw").value;
-    const ind = document.getElementById("ind").value;
-    const names = uniqueNames(kw, ind);
+    var kw = document.getElementById("kw").value;
+    var ind = document.getElementById("ind").value;
+    var names = uniqueNames(kw, ind);
 
     wrap.innerHTML = "";
-    const head = document.createElement("div");
-    head.className = "results-head";
-    head.innerHTML = '<h2>Name ideas</h2><button class="reroll" id="reroll">Shuffle again ↻</button>';
+    var head = document.createElement("div");
+    head.className = "bng-results-head";
+    head.innerHTML = '<h2>Name ideas</h2><button class="bng-reroll" id="reroll">Shuffle again ↻</button>';
     wrap.appendChild(head);
     wrap.appendChild(render(names));
-    document.getElementById("reroll").addEventListener("click",generate);
+    document.getElementById("reroll").addEventListener("click", generate);
 
-    handoff.hidden = false;
+    handoff.classList.remove("bng-hidden");
     if(empty) empty.style.display = "none";
 
-    // handoff for individual cards (PoC: routes to the same availability check)
-    wrap.querySelectorAll(".check").forEach(btn=>{
-      btn.addEventListener("click",()=>{
+    wrap.querySelectorAll(".bng-check").forEach(function(btn){
+      btn.addEventListener("click", function(){
         // In production: prefill the availability search with btn.dataset.name
-        document.querySelector('[data-cta="check"]').scrollIntoView({behavior:"smooth",block:"center"});
+        handoff.scrollIntoView({ behavior:"smooth", block:"start" });
       });
     });
   }
 
-  document.getElementById("gen").addEventListener("click",generate);
-  document.getElementById("kw").addEventListener("keydown",e=>{ if(e.key==="Enter") generate(); });
-
-  // demo CTA handlers — replace hrefs with real NWRA destinations
-  document.querySelectorAll('[data-cta]').forEach(a=>{
-    a.addEventListener("click",e=>{
-      e.preventDefault();
-      alert("PoC link — wire this to the business record search / chat. CTA: "+a.dataset.cta);
-    });
-  });
+  document.getElementById("gen").addEventListener("click", generate);
+  document.getElementById("kw").addEventListener("keydown", function(e){ if(e.key === "Enter") generate(); });
 })();
 </script>
 </body>
