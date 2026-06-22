@@ -303,7 +303,7 @@
 const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
 let state = {
-  step: "q1",
+  step: "q2",
   history: [],
   flags: {},
   answers: {}
@@ -315,7 +315,7 @@ const quizCard = document.getElementById('quizCard');
 const progressFill = document.getElementById('progressFill');
 const backBtn = document.getElementById('backBtn');
 
-const STEP_ORDER = ["q1","q2","q3","q3b","q3c","q3d","q4","q4b","q5","q6"];
+const STEP_ORDER = ["q2","q3","q3b","q3c","q3d","q4","q4b","q5","q6"];
 
 function progressFor(step){
   const idx = STEP_ORDER.indexOf(step);
@@ -339,7 +339,7 @@ function goBack(){
 }
 
 function startOver(){
-  state = { step:"q1", history:[], flags:{}, answers:{} };
+  state = { step:"q2", history:[], flags:{}, answers:{} };
   resultArea.classList.add('hidden');
   resultArea.innerHTML = '';
   quizCard.classList.remove('hidden');
@@ -407,15 +407,7 @@ function render(){
   backBtn.style.visibility = state.history.length === 0 ? 'hidden' : 'visible';
   questionArea.innerHTML = '';
 
-  if(state.step === 'q1'){
-    questionArea.appendChild(renderQuestionHeader("Still an idea, or are you already running the business?"));
-    questionArea.appendChild(buildOptions([
-      { label:"Still an idea", onClick: () => { state.flags.idea_stage = true; goTo('q2'); } },
-      { label:"Already running", onClick: () => { goTo('q2'); } }
-    ]));
-  }
-
-  else if(state.step === 'q2'){
+  if(state.step === 'q2'){
     questionArea.appendChild(renderQuestionHeader("What state do you live in?"));
     questionArea.appendChild(buildStateSelect((val) => {
       state.answers.homeState = val;
@@ -510,22 +502,25 @@ function showResult(){
   const nexusState = getNexusState();
   const formationState = getFormationState();
 
-  let bannerClass, eyebrow, headline, reason;
+  let bannerClass, eyebrow, headline, reason, recommendedState;
 
   if(state.answers.investment){
     bannerClass = 'blue';
     eyebrow = 'Recommended formation state';
     headline = 'Delaware';
     reason = "They're raising outside money — investors expect a Delaware entity.";
+    recommendedState = 'Delaware';
   } else if(state.answers.privacy === 'both'){
     bannerClass = 'gold';
     eyebrow = 'Recommended formation state';
     headline = 'Wyoming';
     reason = "They want their name off the public record — Wyoming doesn't list member names.";
+    recommendedState = 'Wyoming';
   } else {
     bannerClass = 'green';
     eyebrow = 'Recommended formation state';
     headline = `Form in ${formationState}`;
+    recommendedState = formationState;
     if(state.answers.privacy === 'address'){
       reason = `A registered agent keeps their address off the public record without needing to form out of state.`;
     } else {
@@ -534,9 +529,6 @@ function showResult(){
   }
 
   const notes = [];
-  if(state.flags.idea_stage){
-    notes.push("They're not ready to file yet — focus on what they'll need when they are.");
-  }
   if(state.flags.multi_state){
     notes.push(`Operating in multiple states — form in ${nexusState}, register as a foreign LLC in the others.`);
   }
@@ -550,10 +542,10 @@ function showResult(){
     notes.push(`They'll still need to register in ${homeState} if that's where they operate.`);
   }
 
-  const diyState = formationState || homeState;
+  const diyState = recommendedState;
 
   const playbookSteps = [];
-  playbookSteps.push(`<strong>Recommend the state:</strong> Tell them to form in <strong>${headline.replace('Form in ', '')}</strong> — ${reason}`);
+  playbookSteps.push(`<strong>Recommend the state:</strong> Tell them to form in <strong>${recommendedState}</strong> — ${reason}`);
 
   if(state.flags.inventory_other_state){
     playbookSteps.push(`<strong>Call out the inventory situation:</strong> Since their inventory sits in ${state.answers.inventoryState}, that state has nexus too — they'll need a foreign LLC registration there in addition to forming in ${formationState}.`);
