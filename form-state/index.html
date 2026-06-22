@@ -3,286 +3,559 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Find Your Formation State | Northwest Registered Agent</title>
 <meta name="robots" content="noindex, nofollow">
+<title>Where Should They Form Their LLC?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --nwra-navy: #13384F; --nwra-navy-mid: #1F5082; --nwra-blue: #448CCE;
-  --nwra-blue-light: #D6E4F2; --nwra-blue-soft: #EEF3F9; --nwra-gold: #DD9E2D;
-  --nwra-green: #008761; --nwra-gray: #F0F0F0; --nwra-text: #242424;
-  --nwra-muted: #5A6B7A; --nwra-faint: #7A8A99; --nwra-white: #FFFFFF;
-}
-html { font-size: 16px; }
-body {
-  font-family: 'Montserrat','Helvetica Neue',Arial,sans-serif;
-  background: var(--nwra-gray); color: var(--nwra-text); line-height: 1.5;
-  -webkit-font-smoothing: antialiased; min-height: 100vh; padding: 48px 24px;
-}
-@media (max-width: 640px) { body { padding: 24px 14px; } }
-.sg-container { max-width: 560px; margin: 0 auto; }
+  :root{
+    --nwra-navy:#13384F;
+    --nwra-navy-mid:#1F5082;
+    --nwra-blue:#448CCE;
+    --nwra-blue-light:#D6E4F2;
+    --nwra-blue-soft:#EEF3F9;
+    --nwra-gold:#DD9E2D;
+    --nwra-gold-soft:#FDF4E4;
+    --nwra-green:#008761;
+    --nwra-gray:#F0F0F0;
+    --nwra-text:#242424;
+    --nwra-muted:#5A6B7A;
+    --nwra-faint:#7A8A99;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Montserrat',sans-serif;
+    background:var(--nwra-gray);
+    color:var(--nwra-text);
+    padding:32px 16px;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+  }
+  .progress-track{
+    height:5px;
+    background:var(--nwra-blue-soft);
+    border-radius:99px;
+    overflow:hidden;
+    margin-bottom:24px;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--nwra-blue);
+    border-radius:99px;
+    transition:width .3s ease;
+    width:0%;
+  }
+  .card{
+    background:#fff;
+    border-radius:16px;
+    padding:32px;
+    box-shadow:0 2px 20px rgba(19,56,79,0.06);
+  }
+  h1.title{
+    margin:0 0 4px;
+    font-size:22px;
+    font-weight:800;
+    color:var(--nwra-navy);
+    text-align:center;
+  }
+  p.subtitle{
+    margin:0 0 28px;
+    text-align:center;
+    color:var(--nwra-muted);
+    font-size:14px;
+  }
+  .question{
+    font-size:19px;
+    font-weight:700;
+    color:var(--nwra-navy);
+    margin:0 0 20px;
+    line-height:1.4;
+  }
+  select.answer-select{
+    width:100%;
+    padding:14px 16px;
+    font-family:'Montserrat',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--nwra-text);
+    border:2px solid var(--nwra-blue-light);
+    border-radius:12px;
+    background:#fff;
+    margin-bottom:16px;
+    cursor:pointer;
+  }
+  select.answer-select:focus{
+    outline:none;
+    border-color:var(--nwra-blue);
+  }
+  .answers{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:8px;
+  }
+  .answer-btn{
+    width:100%;
+    text-align:left;
+    background:#fff;
+    border:2px solid var(--nwra-blue-light);
+    border-radius:12px;
+    padding:16px 18px;
+    font-family:'Montserrat',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--nwra-navy);
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .answer-btn:hover{
+    border-color:var(--nwra-blue);
+    background:var(--nwra-blue-soft);
+  }
+  .nav-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:24px;
+  }
+  .back-btn{
+    background:none;
+    border:none;
+    color:var(--nwra-muted);
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    padding:8px 0;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .back-btn:hover{
+    color:var(--nwra-navy);
+  }
+  .continue-btn{
+    background:var(--nwra-blue);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:14px 28px;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .continue-btn:hover{
+    background:var(--nwra-navy-mid);
+  }
+  .continue-btn:disabled{
+    background:var(--nwra-faint);
+    cursor:not-allowed;
+  }
 
-.sg-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
-.sg-brand-mark { width: 32px; height: 32px; background: var(--nwra-navy); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
-.sg-brand-mark span { color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; }
-.sg-brand-name { font-size: 13px; font-weight: 600; color: var(--nwra-muted); letter-spacing: 0.03em; }
-
-/* Intro */
-.sg-h1 { font-size: 30px; font-weight: 700; color: var(--nwra-navy); letter-spacing: -0.025em; line-height: 1.12; margin: 0 0 10px; }
-.sg-sub { font-size: 15px; color: var(--nwra-muted); line-height: 1.55; margin: 0 0 24px; }
-@media (max-width: 640px) { .sg-h1 { font-size: 25px; } }
-
-.sg-card { background: var(--nwra-white); border-radius: 16px; padding: 32px; box-shadow: 0 2px 20px rgba(19,56,79,0.06); }
-@media (max-width: 640px) { .sg-card { padding: 24px 18px; border-radius: 12px; } }
-
-.sg-start, .sg-continue {
-  width: 100%; background: var(--nwra-blue); color: #fff; border: none; border-radius: 8px;
-  padding: 17px 28px; font-size: 13px; font-weight: 700; font-family: inherit;
-  letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
-}
-.sg-start:hover, .sg-continue:hover { background: var(--nwra-navy-mid); }
-.sg-continue { margin-top: 20px; }
-.sg-continue:disabled { background: var(--nwra-blue-light); cursor: not-allowed; }
-
-/* Progress */
-.sg-progress-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.sg-step-count { font-size: 11px; font-weight: 700; color: var(--nwra-faint); letter-spacing: 0.1em; text-transform: uppercase; }
-.sg-back { font-family: inherit; font-size: 12px; font-weight: 700; color: var(--nwra-blue); background: none; border: none; cursor: pointer; padding: 4px 0; }
-.sg-back:hover { color: var(--nwra-navy); }
-.sg-bar { height: 5px; background: var(--nwra-blue-soft); border-radius: 999px; overflow: hidden; margin-bottom: 26px; }
-.sg-bar-fill { height: 100%; background: var(--nwra-blue); border-radius: 999px; transition: width 0.3s ease; }
-
-.sg-question { font-size: 22px; font-weight: 700; color: var(--nwra-navy); letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; }
-
-.sg-answers { display: flex; flex-direction: column; gap: 12px; }
-.sg-answer {
-  width: 100%; text-align: left; font-family: inherit; font-size: 15px; font-weight: 700; color: var(--nwra-navy);
-  background: var(--nwra-white); border: 2px solid var(--nwra-blue-light); border-radius: 12px;
-  padding: 17px 20px; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.08s;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
-.sg-answer:hover { border-color: var(--nwra-blue); background: var(--nwra-blue-soft); }
-.sg-answer:active { transform: translateY(1px); }
-.sg-answer-arrow { color: var(--nwra-blue); font-weight: 700; flex-shrink: 0; }
-
-.sg-select {
-  width: 100%; font-family: inherit; font-size: 15px; font-weight: 600; color: var(--nwra-navy);
-  padding: 15px 16px; border: 2px solid var(--nwra-blue-light); border-radius: 10px; background: var(--nwra-white);
-  transition: border-color 0.15s, background 0.15s; appearance: none; -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23448CCE' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px; cursor: pointer;
-}
-.sg-select:focus { outline: none; border-color: var(--nwra-blue); background-color: var(--nwra-blue-soft); }
-
-/* Result */
-.sg-result-card { border-radius: 16px; padding: 34px; color: #fff; position: relative; overflow: hidden; }
-@media (max-width: 640px) { .sg-result-card { padding: 26px 20px; } }
-.sg-result-card.home { background: linear-gradient(135deg, var(--nwra-green) 0%, #04694C 100%); }
-.sg-result-card.delaware { background: linear-gradient(135deg, var(--nwra-blue) 0%, var(--nwra-navy) 100%); }
-.sg-result-card.wyoming { background: linear-gradient(135deg, var(--nwra-gold) 0%, #B97F18 100%); }
-.sg-result-glow { position: absolute; top: 0; right: 0; width: 220px; height: 220px; background: radial-gradient(circle, rgba(255,255,255,0.14) 0%, transparent 70%); border-radius: 50%; transform: translate(30%,-30%); }
-.sg-result-inner { position: relative; z-index: 1; }
-.sg-result-label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.82; margin-bottom: 8px; }
-.sg-result-title { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 14px; }
-.sg-result-reason { font-size: 15.5px; line-height: 1.6; opacity: 0.94; }
-
-.sg-note { background: var(--nwra-white); border-radius: 12px; padding: 16px 18px; margin-top: 14px; box-shadow: 0 2px 14px rgba(19,56,79,0.05); display: flex; gap: 12px; font-size: 13.5px; color: var(--nwra-muted); line-height: 1.55; }
-.sg-note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--nwra-gold); flex-shrink: 0; margin-top: 6px; }
-.sg-note strong { color: var(--nwra-navy); font-weight: 700; }
-
-.sg-reset { width: 100%; margin-top: 20px; background: var(--nwra-white); color: var(--nwra-navy); border: 2px solid var(--nwra-blue-light); border-radius: 8px; padding: 15px; font-size: 12px; font-weight: 700; font-family: inherit; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
-.sg-reset:hover { border-color: var(--nwra-blue); background: var(--nwra-blue-soft); }
-
-.sg-hidden { display: none !important; }
-.sg-pop { opacity: 0; transform: translateY(8px); animation: sgPop 0.3s forwards; }
-@keyframes sgPop { to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .sg-pop { animation: none; opacity: 1; transform: none; } * { transition: none !important; } }
+  /* result page */
+  .banner{
+    border-radius:16px;
+    padding:32px;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .banner.green{ background:linear-gradient(135deg,#008761,#04694C); }
+  .banner.blue{ background:linear-gradient(135deg,var(--nwra-blue),var(--nwra-navy)); }
+  .banner.gold{ background:linear-gradient(135deg,var(--nwra-gold),#B97F18); }
+  .banner .eyebrow{
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    opacity:0.85;
+    margin:0 0 8px;
+  }
+  .banner h2{
+    margin:0 0 10px;
+    font-size:28px;
+    font-weight:800;
+  }
+  .banner p{
+    margin:0;
+    font-size:15px;
+    line-height:1.5;
+    opacity:0.95;
+  }
+  .notes{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .note{
+    background:var(--nwra-blue-soft);
+    border-left:4px solid var(--nwra-blue);
+    border-radius:8px;
+    padding:12px 16px;
+    font-size:13.5px;
+    color:var(--nwra-navy);
+    line-height:1.5;
+  }
+  .close-section{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .close-option{
+    flex:1 1 240px;
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 2px 20px rgba(19,56,79,0.06);
+    display:flex;
+    flex-direction:column;
+  }
+  .close-option h3{
+    margin:0 0 10px;
+    font-size:16px;
+    font-weight:800;
+    color:var(--nwra-navy);
+  }
+  .close-option p{
+    margin:0 0 16px;
+    font-size:13.5px;
+    color:var(--nwra-muted);
+    line-height:1.55;
+    flex-grow:1;
+  }
+  .form-now-btn{
+    display:inline-block;
+    text-align:center;
+    background:var(--nwra-blue);
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    padding:14px 20px;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    transition:background .15s ease;
+  }
+  .form-now-btn:hover{
+    background:var(--nwra-navy-mid);
+  }
+  .start-over-row{
+    text-align:center;
+    margin-top:24px;
+  }
+  .start-over-btn{
+    background:none;
+    border:2px solid var(--nwra-blue-light);
+    color:var(--nwra-navy);
+    border-radius:8px;
+    padding:12px 24px;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    cursor:pointer;
+  }
+  .start-over-btn:hover{
+    border-color:var(--nwra-blue);
+    background:var(--nwra-blue-soft);
+  }
+  .hidden{ display:none !important; }
+  @media (max-width:600px){
+    .card{ padding:24px; }
+    .close-section{ flex-direction:column; }
+  }
 </style>
 </head>
 <body>
-<div class="sg-container">
+<div class="wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
-  <div class="sg-brand">
-    <div class="sg-brand-mark"><span>NW</span></div>
-    <span class="sg-brand-name">Northwest Registered Agent</span>
-  </div>
+  <div class="card" id="quizCard">
+    <h1 class="title">Where Should They Form Their LLC?</h1>
+    <p class="subtitle">Walk through the caller's situation to find the right state.</p>
 
-  <div id="intro">
-    <h1 class="sg-h1">Find the right state to form in</h1>
-    <p class="sg-sub">A few quick questions to land on the right state.</p>
-    <div class="sg-card">
-      <button class="sg-start" id="startBtn">Start</button>
+    <div id="questionArea"></div>
+
+    <div class="nav-row">
+      <button class="back-btn" id="backBtn">&larr; Back</button>
+      <span></span>
     </div>
   </div>
 
-  <div id="quiz" class="sg-hidden">
-    <div class="sg-card">
-      <div class="sg-progress-head">
-        <span class="sg-step-count" id="stepCount">Question 1 of 6</span>
-        <button class="sg-back" id="backBtn">← Back</button>
-      </div>
-      <div class="sg-bar"><div class="sg-bar-fill" id="barFill" style="width:16%"></div></div>
-      <div class="sg-question" id="questionText"></div>
-      <div id="answers"></div>
-    </div>
-  </div>
-
-  <div id="result" class="sg-hidden"></div>
-
+  <div id="resultArea" class="hidden"></div>
 </div>
 
 <script>
-(function(){
-  "use strict";
+const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
-  var STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+let state = {
+  step: "q1",
+  history: [],
+  flags: {},
+  answers: {}
+};
 
-  var NODES = {
-    q1: { n: 1, type: "choice", q: "Have you formed the business yet?",
-      answers: [ { label: "Not yet", next: "q2" }, { label: "Already formed", next: "q2", flag: "formed" } ] },
-    q2: { n: 2, type: "select", q: "What's your home state?", placeholder: "Select a state", next: "q3" },
-    q3: { n: 3, type: "choice", q: "Do you have a physical location for the business, or planning to get one? A store, office, or inventory.",
-      answers: [ { label: "Yes", next: "q4" }, { label: "No, it's online or home-based", next: "q5" } ] },
-    q4: { n: 4, type: "choice", q: "Will you operate in more than one state?",
-      answers: [ { label: "Yes, more than one", next: "q5", flag: "multi" }, { label: "Just one state", next: "q5" } ] },
-    q5: { n: 5, type: "choice", q: "Are you planning to raise money from investors?",
-      answers: [ { label: "Yes", next: "rDelaware" }, { label: "No", next: "q6" } ] },
-    q6: { n: 6, type: "choice", q: "Do you want to keep your name and address off the public record?",
-      answers: [ { label: "Yes", next: "rWyoming" }, { label: "Not really", next: "rHome" } ] }
-  };
+const questionArea = document.getElementById('questionArea');
+const resultArea = document.getElementById('resultArea');
+const quizCard = document.getElementById('quizCard');
+const progressFill = document.getElementById('progressFill');
+const backBtn = document.getElementById('backBtn');
 
-  var TOTAL = 6;
-  var TOK = "{STATE}";
+const STEP_ORDER = ["q1","q2","q3","q3b","q4","q4b","q5","q6"];
 
-  var RESULTS = {
-    rHome: { type: "home", label: "Recommended",
-      title: "Form in " + TOK,
-      reason: "You live and work in " + TOK + ", so that's where the LLC goes. Setting it up in another state means you'd have to register in " + TOK + " too, and pay for both." },
-    rDelaware: { type: "delaware", label: "Recommended",
-      title: "Delaware",
-      reason: "You're raising money, so Delaware's worth it here. Investors expect it and the funding paperwork is built around it. You'll still register in " + TOK + " if you operate there." },
-    rWyoming: { type: "wyoming", label: "Recommended",
-      title: "Wyoming",
-      reason: "Wyoming keeps your name and address off the public record, and the annual fees are low. If you operate in another state, you'll register there too." }
-  };
+function progressFor(step){
+  const idx = STEP_ORDER.indexOf(step);
+  const pct = idx === -1 ? 100 : Math.round(((idx) / STEP_ORDER.length) * 100);
+  return Math.min(pct, 95);
+}
 
-  var homeState = "";
-  var history = [];
-  var flags = {};
+function goTo(step, fromHistoryPush){
+  if(fromHistoryPush !== false){
+    state.history.push(state.step);
+  }
+  state.step = step;
+  render();
+}
 
-  var introEl = document.getElementById("intro");
-  var quizEl = document.getElementById("quiz");
-  var resultEl = document.getElementById("result");
-  var startBtn = document.getElementById("startBtn");
-  var backBtn = document.getElementById("backBtn");
-  var stepCount = document.getElementById("stepCount");
-  var barFill = document.getElementById("barFill");
-  var questionText = document.getElementById("questionText");
-  var answersEl = document.getElementById("answers");
+function goBack(){
+  if(state.history.length === 0) return;
+  const prev = state.history.pop();
+  state.step = prev;
+  render();
+}
 
-  function fill(str){ return String(str).split(TOK).join(homeState || "your home state"); }
+function startOver(){
+  state = { step:"q1", history:[], flags:{}, answers:{} };
+  resultArea.classList.add('hidden');
+  resultArea.innerHTML = '';
+  quizCard.classList.remove('hidden');
+  render();
+}
 
-  function go(next){
-    if (next.charAt(0) === "r") { showResult(next); }
-    else { showNode(next); window.scrollTo({ top: 0, behavior: "smooth" }); }
+function buildOptions(list){
+  const div = document.createElement('div');
+  div.className = 'answers';
+  list.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.textContent = opt.label;
+    btn.onclick = opt.onClick;
+    div.appendChild(btn);
+  });
+  return div;
+}
+
+function buildStateSelect(onContinue, defaultLabel){
+  const wrap = document.createElement('div');
+  const select = document.createElement('select');
+  select.className = 'answer-select';
+  const placeholder = document.createElement('option');
+  placeholder.textContent = defaultLabel || 'Select a state...';
+  placeholder.value = '';
+  placeholder.disabled = true;
+  placeholder.selected = true;
+  select.appendChild(placeholder);
+  STATES.forEach(s => {
+    const o = document.createElement('option');
+    o.value = s;
+    o.textContent = s;
+    select.appendChild(o);
+  });
+  wrap.appendChild(select);
+
+  const continueBtn = document.createElement('button');
+  continueBtn.className = 'continue-btn';
+  continueBtn.textContent = 'Continue';
+  continueBtn.disabled = true;
+  continueBtn.onclick = () => onContinue(select.value);
+  select.addEventListener('change', () => {
+    continueBtn.disabled = !select.value;
+  });
+
+  const row = document.createElement('div');
+  row.style.textAlign = 'right';
+  row.style.marginTop = '8px';
+  row.appendChild(continueBtn);
+  wrap.appendChild(row);
+
+  return wrap;
+}
+
+function renderQuestionHeader(text){
+  const q = document.createElement('div');
+  q.className = 'question';
+  q.textContent = text;
+  return q;
+}
+
+function render(){
+  progressFill.style.width = progressFor(state.step) + '%';
+  backBtn.style.visibility = state.history.length === 0 ? 'hidden' : 'visible';
+  questionArea.innerHTML = '';
+
+  if(state.step === 'q1'){
+    questionArea.appendChild(renderQuestionHeader("Still an idea, or are you already running the business?"));
+    questionArea.appendChild(buildOptions([
+      { label:"Still an idea", onClick: () => { state.flags.idea_stage = true; goTo('q2'); } },
+      { label:"Already running", onClick: () => { goTo('q2'); } }
+    ]));
   }
 
-  function showNode(id){
-    var node = NODES[id];
-    questionText.textContent = node.q;
-    stepCount.textContent = "Question " + node.n + " of " + TOTAL;
-    barFill.style.width = Math.round((node.n / TOTAL) * 100) + "%";
-    backBtn.style.visibility = history.length ? "visible" : "hidden";
-    answersEl.innerHTML = "";
+  else if(state.step === 'q2'){
+    questionArea.appendChild(renderQuestionHeader("What state do you live in?"));
+    questionArea.appendChild(buildStateSelect((val) => {
+      state.answers.homeState = val;
+      goTo('q3');
+    }));
+  }
 
-    if (node.type === "select") {
-      var sel = document.createElement("select");
-      sel.className = "sg-select";
-      var ph = document.createElement("option");
-      ph.value = ""; ph.textContent = node.placeholder; ph.disabled = true; ph.selected = true;
-      sel.appendChild(ph);
-      STATES.forEach(function(st){
-        var o = document.createElement("option"); o.value = st; o.textContent = st;
-        if (st === homeState) o.selected = true;
-        sel.appendChild(o);
-      });
-      var cont = document.createElement("button");
-      cont.className = "sg-continue"; cont.textContent = "Continue"; cont.disabled = !homeState;
-      sel.addEventListener("change", function(){ homeState = sel.value; cont.disabled = !homeState; });
-      cont.addEventListener("click", function(){ if (!homeState) return; history.push(id); go(node.next); });
-      answersEl.appendChild(sel);
-      answersEl.appendChild(cont);
+  else if(state.step === 'q3'){
+    questionArea.appendChild(renderQuestionHeader("Will it be a physical location business, or fully online?"));
+    questionArea.appendChild(buildOptions([
+      { label:"Physical location", onClick: () => goTo('q4') },
+      { label:"Fully online", onClick: () => goTo('q3b') }
+    ]));
+  }
+
+  else if(state.step === 'q3b'){
+    questionArea.appendChild(renderQuestionHeader("Will you store inventory anywhere?"));
+    questionArea.appendChild(buildOptions([
+      { label:"Yes, at home or a warehouse", onClick: () => { state.flags.inventory_home = true; goTo('q5'); } },
+      { label:"No inventory", onClick: () => goTo('q5') }
+    ]));
+  }
+
+  else if(state.step === 'q4'){
+    questionArea.appendChild(renderQuestionHeader(`Will the business operate in just ${state.answers.homeState}, or in other states too?`));
+    questionArea.appendChild(buildOptions([
+      { label:`Just ${state.answers.homeState}`, onClick: () => goTo('q5') },
+      { label:"Other states too", onClick: () => { state.flags.multi_state = true; goTo('q4b'); } }
+    ]));
+  }
+
+  else if(state.step === 'q4b'){
+    questionArea.appendChild(renderQuestionHeader("Which state will you operate in most?"));
+    questionArea.appendChild(buildStateSelect((val) => {
+      state.answers.nexusState = val;
+      goTo('q5');
+    }));
+  }
+
+  else if(state.step === 'q5'){
+    questionArea.appendChild(renderQuestionHeader("Are you planning to raise outside investment? Angel investors or venture capital — not family or friends putting in money."));
+    questionArea.appendChild(buildOptions([
+      { label:"Yes", onClick: () => { state.answers.investment = true; goTo('result'); } },
+      { label:"No", onClick: () => goTo('q6') }
+    ]));
+  }
+
+  else if(state.step === 'q6'){
+    questionArea.appendChild(renderQuestionHeader("When you form an LLC, your name and address go on the public record. There are two ways to protect that: a registered agent keeps your address off, and forming in Wyoming keeps your name off too. Which matters to you?"));
+    questionArea.appendChild(buildOptions([
+      { label:"Just my address", onClick: () => { state.flags.privacy_address = true; state.answers.privacy = 'address'; goTo('result'); } },
+      { label:"Both my name and address", onClick: () => { state.answers.privacy = 'both'; goTo('result'); } },
+      { label:"Not concerned", onClick: () => { state.answers.privacy = 'none'; goTo('result'); } }
+    ]));
+  }
+
+  else if(state.step === 'result'){
+    showResult();
+  }
+}
+
+function getNexusState(){
+  return state.flags.multi_state ? state.answers.nexusState : state.answers.homeState;
+}
+
+function getFormationState(){
+  return getNexusState();
+}
+
+function showResult(){
+  quizCard.classList.add('hidden');
+  resultArea.classList.remove('hidden');
+  progressFill.style.width = '100%';
+
+  const homeState = state.answers.homeState;
+  const nexusState = getNexusState();
+  const formationState = getFormationState();
+
+  let bannerClass, eyebrow, headline, reason;
+
+  if(state.answers.investment){
+    bannerClass = 'blue';
+    eyebrow = 'Recommended formation state';
+    headline = 'Delaware';
+    reason = "They're raising outside money — investors expect a Delaware entity.";
+  } else if(state.answers.privacy === 'both'){
+    bannerClass = 'gold';
+    eyebrow = 'Recommended formation state';
+    headline = 'Wyoming';
+    reason = "They want their name off the public record — Wyoming doesn't list member names.";
+  } else {
+    bannerClass = 'green';
+    eyebrow = 'Recommended formation state';
+    headline = `Form in ${formationState}`;
+    if(state.answers.privacy === 'address'){
+      reason = `A registered agent keeps their address off the public record without needing to form out of state.`;
     } else {
-      var wrap = document.createElement("div");
-      wrap.className = "sg-answers";
-      node.answers.forEach(function(a){
-        var b = document.createElement("button");
-        b.className = "sg-answer";
-        b.innerHTML = "<span>" + a.label + "</span><span class='sg-answer-arrow'>→</span>";
-        b.addEventListener("click", function(){
-          history.push(id);
-          if (a.flag) flags[a.flag] = true;
-          go(a.next);
-        });
-        wrap.appendChild(b);
-      });
-      answersEl.appendChild(wrap);
+      reason = `Forming where they actually do business keeps things simple and avoids extra filings.`;
     }
-    quizEl.classList.remove("sg-pop"); void quizEl.offsetWidth; quizEl.classList.add("sg-pop");
   }
 
-  function showResult(id){
-    var r = RESULTS[id];
-    var notes = "";
-    if (flags.multi) {
-      notes += "<div class='sg-note'><span class='sg-note-dot'></span><span><strong>Operating in more than one state.</strong> Set up in " + (homeState || "the home state") + " and register as a foreign LLC in the others.</span></div>";
-    }
-    if (flags.formed) {
-      notes += "<div class='sg-note'><span class='sg-note-dot'></span><span><strong>Already formed.</strong> If it's not set up in " + (homeState || "the home state") + ", check that it's registered correctly for where they operate.</span></div>";
-    }
-
-    resultEl.innerHTML =
-      "<div class='sg-result-card " + r.type + "'><div class='sg-result-glow'></div><div class='sg-result-inner'>" +
-        "<div class='sg-result-label'>" + r.label + "</div>" +
-        "<div class='sg-result-title'>" + fill(r.title) + "</div>" +
-        "<div class='sg-result-reason'>" + fill(r.reason) + "</div>" +
-      "</div></div>" + notes +
-      "<button class='sg-reset' id='resetBtn'>Start over</button>";
-
-    introEl.classList.add("sg-hidden");
-    quizEl.classList.add("sg-hidden");
-    resultEl.classList.remove("sg-hidden");
-    resultEl.classList.add("sg-pop");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    document.getElementById("resetBtn").addEventListener("click", resetAll);
+  const notes = [];
+  if(state.flags.idea_stage){
+    notes.push("They're not ready to file yet — focus on what they'll need when they are.");
+  }
+  if(state.flags.multi_state){
+    notes.push(`Operating in multiple states — form in ${nexusState}, register as a foreign LLC in the others.`);
+  }
+  if(state.flags.inventory_home){
+    notes.push(`Inventory stored at home still creates nexus — ${homeState} formation likely applies.`);
+  }
+  if(headline === 'Wyoming'){
+    notes.push(`They'll still need to register in ${homeState} if that's where they operate.`);
   }
 
-  function resetAll(){
-    history = []; flags = {}; homeState = "";
-    resultEl.classList.add("sg-hidden"); resultEl.innerHTML = "";
-    quizEl.classList.add("sg-hidden");
-    introEl.classList.remove("sg-hidden");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  const diyState = formationState || homeState;
 
-  startBtn.addEventListener("click", function(){
-    history = []; flags = {}; homeState = "";
-    introEl.classList.add("sg-hidden");
-    quizEl.classList.remove("sg-hidden");
-    showNode("q1");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  resultArea.innerHTML = `
+    <div class="banner ${bannerClass}">
+      <p class="eyebrow">${eyebrow}</p>
+      <h2>${headline}</h2>
+      <p>${reason}</p>
+    </div>
+    ${notes.length ? `<div class="notes">${notes.map(n => `<div class="note">${n}</div>`).join('')}</div>` : ''}
+    <div class="close-section">
+      <div class="close-option">
+        <h3>Form with Northwest</h3>
+        <p>We handle the whole thing — LLC formation, registered agent, domain, business email, and phone number. $39 + state fees.</p>
+        <a class="form-now-btn" href="https://www.northwestregisteredagent.com" target="_blank" rel="noopener">Form Now</a>
+      </div>
+      <div class="close-option">
+        <h3>Forming on your own</h3>
+        <p>Search "${diyState} LLC Secretary of State" and find the official site. You'll create an account, fill out the Articles of Organization, and pay the state fee. Check if your state requires annual reports — if you miss them, the state can shut your business down.</p>
+      </div>
+    </div>
+    <div class="start-over-row">
+      <button class="start-over-btn" id="startOverBtn">Start Over</button>
+    </div>
+  `;
+  document.getElementById('startOverBtn').onclick = startOver;
+}
 
-  backBtn.addEventListener("click", function(){
-    if (!history.length) return;
-    var prev = history.pop();
-    showNode(prev);
-  });
+backBtn.addEventListener('click', goBack);
 
-})();
+render();
 </script>
 </body>
 </html>
