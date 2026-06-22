@@ -203,27 +203,6 @@
     color:var(--nwra-navy);
     line-height:1.5;
   }
-  .nexus-box{
-    background:var(--nwra-gold-soft);
-    border-left:4px solid var(--nwra-gold);
-    border-radius:8px;
-    padding:16px 18px;
-    margin-bottom:20px;
-  }
-  .nexus-box h4{
-    margin:0 0 6px;
-    font-size:13px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    color:var(--nwra-navy);
-  }
-  .nexus-box p{
-    margin:0;
-    font-size:13.5px;
-    color:var(--nwra-text);
-    line-height:1.55;
-  }
   .playbook-card{
     background:#fff;
     border-radius:16px;
@@ -466,7 +445,7 @@ function render(){
   else if(state.step === 'q5'){
     questionArea.appendChild(renderQuestionHeader("Are you planning to raise outside investment? Angel investors or venture capital — not family or friends putting in money."));
     questionArea.appendChild(buildOptions([
-      { label:"Yes", onClick: () => { state.answers.investment = true; goTo('result'); } },
+      { label:"Yes", onClick: () => { state.answers.investment = true; goTo('q6'); } },
       { label:"No", onClick: () => goTo('q6') }
     ]));
   }
@@ -528,18 +507,21 @@ function showResult(){
     }
   }
 
+  const operatingState = nexusState;
+  const formingOutOfState = recommendedState !== operatingState;
+
   const notes = [];
+  if(formingOutOfState){
+    notes.push(`They're forming in ${recommendedState}, but operate out of ${operatingState} — they'll need a registered agent in ${recommendedState}, and will likely need to register as a foreign LLC in ${operatingState}.`);
+  }
   if(state.flags.multi_state){
-    notes.push(`Operating in multiple states — form in ${nexusState}, register as a foreign LLC in the others.`);
+    notes.push(`They also operate in other states beyond ${operatingState} — those will likely need separate foreign LLC registrations too.`);
   }
   if(state.flags.inventory_home){
     notes.push(`Inventory stored at home still creates nexus — ${homeState} formation likely applies.`);
   }
   if(state.flags.inventory_other_state){
-    notes.push(`Inventory stored in ${state.answers.inventoryState} creates nexus there too — they'll likely need to form in ${formationState} and register as a foreign LLC in ${state.answers.inventoryState}.`);
-  }
-  if(headline === 'Wyoming'){
-    notes.push(`They'll still need to register in ${homeState} if that's where they operate.`);
+    notes.push(`Inventory stored in ${state.answers.inventoryState} creates nexus there too — on top of forming in ${recommendedState}, they'll likely need a foreign LLC registration in ${state.answers.inventoryState}.`);
   }
 
   const diyState = recommendedState;
@@ -548,13 +530,17 @@ function showResult(){
   playbookSteps.push(`<strong>Recommend the state:</strong> Tell them to form in <strong>${recommendedState}</strong> — ${reason}`);
 
   if(state.flags.inventory_other_state){
-    playbookSteps.push(`<strong>Call out the inventory situation:</strong> Since their inventory sits in ${state.answers.inventoryState}, that state has nexus too — they'll need a foreign LLC registration there in addition to forming in ${formationState}.`);
+    playbookSteps.push(`<strong>Call out the inventory situation:</strong> Since their inventory sits in ${state.answers.inventoryState}, that state has nexus too — they'll need a foreign LLC registration there in addition to forming in ${recommendedState}.`);
   } else if(state.flags.inventory_home){
     playbookSteps.push(`<strong>Call out the inventory situation:</strong> Their inventory stays in ${homeState}, so it doesn't add a second state — ${homeState} formation already covers it.`);
   }
 
-  playbookSteps.push(`<strong>If they ask what "nexus" means:</strong> use the plain-language explainer below — keep it simple, don't get into tax jargon.`);
-  playbookSteps.push(`<strong>Offer to handle it:</strong> Northwest can form the LLC, plus registered agent, domain, business email, and phone number — $39 + state fees.`);
+  if(formingOutOfState){
+    playbookSteps.push(`<strong>Call out the registered agent requirement:</strong> Forming in ${recommendedState} means they need a registered agent there, plus a foreign LLC registration in ${operatingState} since that's where they actually operate. Northwest includes registered agent service free for the first year, plus a domain, website, business phone line, and email with formation.`);
+  } else {
+    playbookSteps.push(`<strong>Offer to handle it:</strong> Northwest can form the LLC, plus registered agent, domain, business email, and phone number — $39 + state fees.`);
+  }
+
   playbookSteps.push(`<strong>If they want to DIY:</strong> Search "${diyState} LLC Secretary of State," create an account, file the Articles of Organization, and pay the state fee. Remind them to check annual report requirements — missing one can get the business shut down.`);
 
   resultArea.innerHTML = `
@@ -564,10 +550,6 @@ function showResult(){
       <p>${reason}</p>
     </div>
     ${notes.length ? `<div class="notes">${notes.map(n => `<div class="note">${n}</div>`).join('')}</div>` : ''}
-    <div class="nexus-box">
-      <h4>What's "nexus"?</h4>
-      <p>Nexus just means a state where the business has enough of a presence — a location, employees, or inventory there — that the state requires it to register and pay attention to its rules. It's not a formation requirement by itself, but it usually means a foreign LLC registration in that state.</p>
-    </div>
     <div class="playbook-card">
       <h3>Next steps for you</h3>
       <ol>
