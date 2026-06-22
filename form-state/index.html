@@ -203,49 +203,54 @@
     color:var(--nwra-navy);
     line-height:1.5;
   }
-  .close-section{
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
+  .nexus-box{
+    background:var(--nwra-gold-soft);
+    border-left:4px solid var(--nwra-gold);
+    border-radius:8px;
+    padding:16px 18px;
+    margin-bottom:20px;
   }
-  .close-option{
-    flex:1 1 240px;
+  .nexus-box h4{
+    margin:0 0 6px;
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--nwra-navy);
+  }
+  .nexus-box p{
+    margin:0;
+    font-size:13.5px;
+    color:var(--nwra-text);
+    line-height:1.55;
+  }
+  .playbook-card{
     background:#fff;
     border-radius:16px;
     padding:24px;
     box-shadow:0 2px 20px rgba(19,56,79,0.06);
-    display:flex;
-    flex-direction:column;
   }
-  .close-option h3{
-    margin:0 0 10px;
+  .playbook-card h3{
+    margin:0 0 16px;
     font-size:16px;
     font-weight:800;
     color:var(--nwra-navy);
   }
-  .close-option p{
-    margin:0 0 16px;
+  .playbook-card ol{
+    margin:0;
+    padding-left:20px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .playbook-card li{
     font-size:13.5px;
     color:var(--nwra-muted);
     line-height:1.55;
-    flex-grow:1;
   }
-  .form-now-btn{
-    display:inline-block;
-    text-align:center;
-    background:var(--nwra-blue);
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-    padding:14px 20px;
-    font-size:13px;
+  .playbook-card li strong{
+    color:var(--nwra-navy);
     font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.07em;
-    transition:background .15s ease;
-  }
-  .form-now-btn:hover{
-    background:var(--nwra-navy-mid);
   }
   .start-over-row{
     text-align:center;
@@ -271,7 +276,7 @@
   .hidden{ display:none !important; }
   @media (max-width:600px){
     .card{ padding:24px; }
-    .close-section{ flex-direction:column; }
+    .playbook-card{ padding:20px; }
   }
 </style>
 </head>
@@ -310,7 +315,7 @@ const quizCard = document.getElementById('quizCard');
 const progressFill = document.getElementById('progressFill');
 const backBtn = document.getElementById('backBtn');
 
-const STEP_ORDER = ["q1","q2","q3","q3b","q4","q4b","q5","q6"];
+const STEP_ORDER = ["q1","q2","q3","q3b","q3c","q3d","q4","q4b","q5","q6"];
 
 function progressFor(step){
   const idx = STEP_ORDER.indexOf(step);
@@ -429,9 +434,25 @@ function render(){
   else if(state.step === 'q3b'){
     questionArea.appendChild(renderQuestionHeader("Will you store inventory anywhere?"));
     questionArea.appendChild(buildOptions([
-      { label:"Yes, at home or a warehouse", onClick: () => { state.flags.inventory_home = true; goTo('q5'); } },
+      { label:"Yes, at home or a warehouse", onClick: () => goTo('q3c') },
       { label:"No inventory", onClick: () => goTo('q5') }
     ]));
+  }
+
+  else if(state.step === 'q3c'){
+    questionArea.appendChild(renderQuestionHeader(`Will that inventory stay in ${state.answers.homeState}, or will it be stored somewhere else?`));
+    questionArea.appendChild(buildOptions([
+      { label:`Stays in ${state.answers.homeState}`, onClick: () => { state.flags.inventory_home = true; goTo('q5'); } },
+      { label:"Stored in another state", onClick: () => { state.flags.inventory_other_state = true; goTo('q3d'); } }
+    ]));
+  }
+
+  else if(state.step === 'q3d'){
+    questionArea.appendChild(renderQuestionHeader("Which state will the inventory be stored in?"));
+    questionArea.appendChild(buildStateSelect((val) => {
+      state.answers.inventoryState = val;
+      goTo('q5');
+    }));
   }
 
   else if(state.step === 'q4'){
@@ -522,11 +543,27 @@ function showResult(){
   if(state.flags.inventory_home){
     notes.push(`Inventory stored at home still creates nexus — ${homeState} formation likely applies.`);
   }
+  if(state.flags.inventory_other_state){
+    notes.push(`Inventory stored in ${state.answers.inventoryState} creates nexus there too — they'll likely need to form in ${formationState} and register as a foreign LLC in ${state.answers.inventoryState}.`);
+  }
   if(headline === 'Wyoming'){
     notes.push(`They'll still need to register in ${homeState} if that's where they operate.`);
   }
 
   const diyState = formationState || homeState;
+
+  const playbookSteps = [];
+  playbookSteps.push(`<strong>Recommend the state:</strong> Tell them to form in <strong>${headline.replace('Form in ', '')}</strong> — ${reason}`);
+
+  if(state.flags.inventory_other_state){
+    playbookSteps.push(`<strong>Call out the inventory situation:</strong> Since their inventory sits in ${state.answers.inventoryState}, that state has nexus too — they'll need a foreign LLC registration there in addition to forming in ${formationState}.`);
+  } else if(state.flags.inventory_home){
+    playbookSteps.push(`<strong>Call out the inventory situation:</strong> Their inventory stays in ${homeState}, so it doesn't add a second state — ${homeState} formation already covers it.`);
+  }
+
+  playbookSteps.push(`<strong>If they ask what "nexus" means:</strong> use the plain-language explainer below — keep it simple, don't get into tax jargon.`);
+  playbookSteps.push(`<strong>Offer to handle it:</strong> Northwest can form the LLC, plus registered agent, domain, business email, and phone number — $39 + state fees.`);
+  playbookSteps.push(`<strong>If they want to DIY:</strong> Search "${diyState} LLC Secretary of State," create an account, file the Articles of Organization, and pay the state fee. Remind them to check annual report requirements — missing one can get the business shut down.`);
 
   resultArea.innerHTML = `
     <div class="banner ${bannerClass}">
@@ -535,16 +572,15 @@ function showResult(){
       <p>${reason}</p>
     </div>
     ${notes.length ? `<div class="notes">${notes.map(n => `<div class="note">${n}</div>`).join('')}</div>` : ''}
-    <div class="close-section">
-      <div class="close-option">
-        <h3>Form with Northwest</h3>
-        <p>We handle the whole thing — LLC formation, registered agent, domain, business email, and phone number. $39 + state fees.</p>
-        <a class="form-now-btn" href="https://www.northwestregisteredagent.com" target="_blank" rel="noopener">Form Now</a>
-      </div>
-      <div class="close-option">
-        <h3>Forming on your own</h3>
-        <p>Search "${diyState} LLC Secretary of State" and find the official site. You'll create an account, fill out the Articles of Organization, and pay the state fee. Check if your state requires annual reports — if you miss them, the state can shut your business down.</p>
-      </div>
+    <div class="nexus-box">
+      <h4>What's "nexus"?</h4>
+      <p>Nexus just means a state where the business has enough of a presence — a location, employees, or inventory there — that the state requires it to register and pay attention to its rules. It's not a formation requirement by itself, but it usually means a foreign LLC registration in that state.</p>
+    </div>
+    <div class="playbook-card">
+      <h3>Next steps for you</h3>
+      <ol>
+        ${playbookSteps.map(s => `<li>${s}</li>`).join('')}
+      </ol>
     </div>
     <div class="start-over-row">
       <button class="start-over-btn" id="startOverBtn">Start Over</button>
