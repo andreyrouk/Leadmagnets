@@ -395,10 +395,10 @@ function render(){
   }
 
   else if(state.step === 'q2b'){
-    questionArea.appendChild(renderQuestionHeader("Any deadline or timeline you're working against — closing a deal, signing a lease, opening a bank account?"));
+    questionArea.appendChild(renderQuestionHeader("How quickly do you want to form your LLC?"));
     questionArea.appendChild(buildOptions([
-      { label:"Yes, I need this done ASAP", onClick: () => { state.flags.urgent = true; state.answers.urgency = 'asap'; goTo('q3'); } },
-      { label:"I have a deadline a few weeks out", onClick: () => { state.answers.urgency = 'soon'; goTo('q3'); } },
+      { label:"ASAP", onClick: () => { state.flags.urgent = true; state.answers.urgency = 'asap'; goTo('q3'); } },
+      { label:"A few weeks out", onClick: () => { state.answers.urgency = 'soon'; goTo('q3'); } },
       { label:"No rush, just exploring", onClick: () => { state.answers.urgency = 'none'; goTo('q3'); } }
     ]));
   }
