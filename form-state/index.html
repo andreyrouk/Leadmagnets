@@ -188,20 +188,6 @@
     line-height:1.5;
     opacity:0.95;
   }
-  .fee-row{
-    display:flex;
-    justify-content:center;
-    margin:-8px 0 20px;
-  }
-  .fee-pill{
-    background:#fff;
-    border-radius:99px;
-    padding:10px 18px;
-    font-size:12.5px;
-    font-weight:600;
-    color:var(--nwra-navy);
-    box-shadow:0 2px 20px rgba(19,56,79,0.06);
-  }
   .notes{
     display:flex;
     flex-direction:column;
@@ -295,19 +281,6 @@
 <script>
 const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
-var STATE_FEES = {
-  "Alabama":35,"Alaska":250,"Arizona":50,"Arkansas":45,"California":70,
-  "Colorado":50,"Connecticut":120,"Delaware":110,"Florida":125,"Georgia":100,
-  "Hawaii":50,"Idaho":100,"Illinois":150,"Indiana":95,"Iowa":50,
-  "Kansas":160,"Kentucky":40,"Louisiana":100,"Maine":175,"Maryland":100,
-  "Massachusetts":500,"Michigan":50,"Minnesota":155,"Mississippi":50,"Missouri":50,
-  "Montana":35,"Nebraska":100,"Nevada":425,"New Hampshire":100,"New Jersey":125,
-  "New Mexico":50,"New York":205,"North Carolina":125,"North Dakota":135,"Ohio":99,
-  "Oklahoma":100,"Oregon":100,"Pennsylvania":125,"Rhode Island":150,"South Carolina":110,
-  "South Dakota":150,"Tennessee":300,"Texas":300,"Utah":59,"Vermont":155,
-  "Virginia":100,"Washington":200,"West Virginia":130,"Wisconsin":130,"Wyoming":100
-};
-
 let state = {
   step: "q2",
   history: [],
@@ -321,7 +294,7 @@ const quizCard = document.getElementById('quizCard');
 const progressFill = document.getElementById('progressFill');
 const backBtn = document.getElementById('backBtn');
 
-const STEP_ORDER = ["q2","q3","q3b","q3c","q3d","q4","q4b","q5","q6"];
+const STEP_ORDER = ["q2","q2b","q3","q3b","q3c","q3d","q4","q4b","q5","q6"];
 
 function progressFor(step){
   const idx = STEP_ORDER.indexOf(step);
@@ -417,8 +390,17 @@ function render(){
     questionArea.appendChild(renderQuestionHeader("What state do you live in?"));
     questionArea.appendChild(buildStateSelect((val) => {
       state.answers.homeState = val;
-      goTo('q3');
+      goTo('q2b');
     }));
+  }
+
+  else if(state.step === 'q2b'){
+    questionArea.appendChild(renderQuestionHeader("Any deadline or timeline you're working against — closing a deal, signing a lease, opening a bank account?"));
+    questionArea.appendChild(buildOptions([
+      { label:"Yes, I need this done ASAP", onClick: () => { state.flags.urgent = true; state.answers.urgency = 'asap'; goTo('q3'); } },
+      { label:"I have a deadline a few weeks out", onClick: () => { state.answers.urgency = 'soon'; goTo('q3'); } },
+      { label:"No rush, just exploring", onClick: () => { state.answers.urgency = 'none'; goTo('q3'); } }
+    ]));
   }
 
   else if(state.step === 'q3'){
@@ -551,11 +533,16 @@ function showResult(){
     notes.push(`Inventory stored in ${state.answers.inventoryState} creates nexus there too — on top of forming in ${recommendedState}, they'll likely need a foreign LLC registration in ${state.answers.inventoryState}.`);
   }
 
-  const filingFee = STATE_FEES[state.flags.multi_state ? state.answers.nexusState : homeState];
+  if(state.flags.urgent){
+    notes.unshift(`They're on a deadline — prioritize getting this filed quickly rather than walking through every option.`);
+  }
 
   const diyState = recommendedState;
 
   const playbookSteps = [];
+  if(state.flags.urgent){
+    playbookSteps.push(`<strong>They're in a hurry:</strong> lead with how fast Northwest can file and skip straight to next steps — don't slow them down with extra detail.`);
+  }
   playbookSteps.push(`<strong>Recommend the state:</strong> Tell them to form in <strong>${recommendedState}</strong> — ${reason}`);
 
   if(state.flags.inventory_other_state){
@@ -578,7 +565,6 @@ function showResult(){
       <h2>${headline}</h2>
       <p>${reason}</p>
     </div>
-    <div class="fee-row"><span class="fee-pill">State filing fee: $${filingFee}&nbsp;&nbsp;&middot;&nbsp;&nbsp;Northwest formation: $39 + state fee</span></div>
     ${notes.length ? `<div class="notes">${notes.map(n => `<div class="note">${n}</div>`).join('')}</div>` : ''}
     <div class="playbook-card">
       <h3>Next steps for you</h3>
